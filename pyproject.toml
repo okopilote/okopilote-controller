@@ -1,0 +1,74 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "okopilote-controller"
+dynamic = ["version"]
+description = "Controller part of the Okopilote suite"
+readme = "README.md"
+requires-python = ">=3.7"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "François", email = "francoismdj@gmx.com" },
+]
+classifiers = [
+  "Topic :: Software Development :: Embedded Systems",
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "bottle~=0.12.18",
+  "requests~=2.22.0",
+]
+
+[project.optional-dependencies]
+okofen-touch4 = ["okopilote-boilers-okofen-touch"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/okopilote"]
+
+[tool.hatch.version]
+path = "src/okopilote/controller/__about__.py"
+
+[project.scripts]
+okopilote-controller = "okopilote.controller.entry_point:run"
+
+[project.urls]
+Documentation = "https://github.com/okopilote/okopilote-controller#readme"
+Issues = "https://github.com/okopilote/okopilote-controller/issues"
+Source = "https://github.com/okopilote/okopilote-controller"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/okopilote/controller tests}"
+
+[tool.coverage.run]
+source_pkgs = ["okopilote", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/okopilote/controller/__about__.py",
+]
+
+[tool.coverage.paths]
+okopilote_controller = ["src/okopilote/controller", "*/controller/src/okopilote/controller"]
+tests = ["tests", "*/controller/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
