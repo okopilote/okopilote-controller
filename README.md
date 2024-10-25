@@ -18,9 +18,6 @@ through a boiler-dependent module.
 ### FUTUR: install packages from PyPi
 
 ```console
-# Install the controller
-pip install okopilote-controller
-
 # Install the controller and the relevant boiler module. Example with Okofen Pellematic
 # Touch v4 boiler:
 pip install okopilote-controller[okofen-touch4]
