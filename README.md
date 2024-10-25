@@ -2,10 +2,10 @@
 
 Okopilote-controller is the controller part of the Okopilote suite. It collects heat
 needs from rooms and drives the central heating system accordingly, enforcing heat
-generation when needed. The regulation is optimized to get long-run cycles by avoiding
-frequent on/off boiler switches.
+generation when needed. The regulation is optimized for getting long-run cycles by
+avoiding frequent on/off boiler switches.
 The controller acts on top of the inner regulation of the central heating system
-through boiler-dependend module.
+through a boiler-dependend module.
 
 ## Table of Contents
 
@@ -27,7 +27,7 @@ pip install okopilote-boilers-okofen-touch4
 Copy configuration file from repository :
 
 ```console
-copy examples/controller-example.conf /some/etc/dir/okopilote/controller.conf
+cp examples/controller-example.conf /some/etc/dir/okopilote/controller.conf
 ```
 
 Adjust configuration then run okopilote-controller :
