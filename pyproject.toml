@@ -31,7 +31,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-okofen-touch4 = ["okopilote-boilers-okofen-touch"]
+okofen-touch4 = ["okopilote-boilers-okofen-touch4"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/okopilote"]
