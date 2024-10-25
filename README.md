@@ -5,7 +5,7 @@ needs from rooms and drives the central heating system accordingly, enforcing he
 generation when needed. The regulation is optimized for getting long-run cycles by
 avoiding frequent on/off boiler switches.
 The controller acts on top of the inner regulation of the central heating system
-through a boiler-dependend module.
+through a boiler-dependent module.
 
 ## Table of Contents
 
