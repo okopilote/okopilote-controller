@@ -10,19 +10,36 @@ through a boiler-dependent module.
 ## Table of Contents
 
 - [Installation](#installation)
+- [Usage](#Usage)
 - [License](#license)
 
 ## Installation
 
-Install packages :
+### FUTUR: install packages from PyPi
 
 ```console
 # Install the controller
 pip install okopilote-controller
 
-# Also install the boiler-specific module. Example with Okofen Pellematic Touch v4:
-pip install okopilote-boilers-okofen-touch4
+# Install the controller and the relevant boiler module. Example with Okofen Pellematic
+# Touch v4 boiler:
+pip install okopilote-controller[okofen-touch4]
+
+# Or install controller and module separately
+pip install okopilote okopilote-boilers-okofen-touch4
 ```
+
+### PRESENT: build and install packages
+
+Packages have be installed from distribution files:
+
+```console
+pip install okopilote_controller-a.b.c-py3-none-any.whl
+pip install okopilote_devices_common-d.e.f-py3-none-any.whl
+pip install okopilote_boilers_okofen_touch4-g.h.i-py3-none-any.whl
+```
+
+## Usage
 
 Copy configuration file from repository :
 
