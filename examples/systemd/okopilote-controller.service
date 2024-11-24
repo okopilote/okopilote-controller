@@ -1,0 +1,14 @@
+[Unit]
+Description=Okopilote controller
+Documentation=https://github.com/okopilote/okopilote-controller
+After=network.target
+
+[Service]
+Type=notify
+ExecStart=/usr/local/bin/okopilote-controller \
+          --conf /etc/okopilote/controller.conf
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+Alias=okopilote-controller.service
