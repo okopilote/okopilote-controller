@@ -28,7 +28,7 @@ pip install okopilote okopilote-boilers-okofen-touch4
 
 ### PRESENT: build and install packages
 
-Packages have be installed from distribution files:
+Install packages from distribution files:
 
 ```console
 pip install okopilote_controller-a.b.c-py3-none-any.whl
@@ -38,13 +38,13 @@ pip install okopilote_boilers_okofen_touch4-g.h.i-py3-none-any.whl
 
 ## Usage
 
-Copy configuration file from repository :
+Copy configuration file from repository:
 
 ```console
 cp examples/controller-example.conf /some/etc/dir/okopilote/controller.conf
 ```
 
-Adjust configuration then run okopilote-controller :
+Adjust configuration then run okopilote-controller:
 
 ```console
 okopilote-controller -c /some/etc/dir/okopilote/controller.conf [-v] [--dry-run]
