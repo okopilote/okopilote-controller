@@ -154,9 +154,7 @@ class Controller(threading.Thread):
             logger.error(errors[-1])
         for id_, r in self.roomset.rooms.items():
             if r.temp_deviation is None:
-                warnings.append(
-                    f"Room ''{id_}' does\'nt know its temperature deviation"
-                )
+                warnings.append(f"Room ''{id_}' does'nt know its temperature deviation")
 
         # Compute heat necessity
         self.cold_rooms = [
