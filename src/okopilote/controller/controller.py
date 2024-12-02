@@ -59,6 +59,7 @@ class Controller(threading.Thread):
         self.boiler_gen_heat = None
         self.boiler_deliv_heat = None
         self.boiler_heat_avail = None
+        self.futur_circulator_state = None
         self.force_heat = False
         # Engine (boiler) starter
         self.starter = False
@@ -147,19 +148,13 @@ class Controller(threading.Thread):
 
         # Sync rooms
         try:
-            self.roomset.controller_sync(
-                temp_set_offset=self.set_offset, circulator_runs=self.boiler_deliv_heat
-            )
+            self.roomset.controller_sync(temp_set_offset=self.set_offset)
         except Exception as e:
             errors.append("Rooms sync: {}".format(e))
             logger.error(errors[-1])
         for id_, r in self.roomset.rooms.items():
             if r.temp_deviation is None:
-                warnings.append(
-                    ('Room "{}" does\'nt know its temperature ' + "deviation").format(
-                        id_
-                    )
-                )
+                warnings.append(f"Room ''{id_}' does'nt know its temperature deviation")
 
         # Compute heat necessity
         self.cold_rooms = [
@@ -188,6 +183,14 @@ class Controller(threading.Thread):
         else:
             self.worse_deviation = 0
             self.force_heat = False
+
+        # Advertise present or futur circulator state to rooms
+        self.futur_circulator_state = self.boiler_deliv_heat or self.force_heat
+        try:
+            self.roomset.controller_sync(circulator_runs=self.futur_circulator_state)
+        except Exception as e:
+            errors.append("Rooms sync: {}".format(e))
+            logger.error(errors[-1])
 
         # Apply the decision
         try:

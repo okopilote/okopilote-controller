@@ -24,18 +24,24 @@ class RoomSet:
         if r.status_code != 200:
             raise RoomError("unexpected response from {}: {}".format(url, r))
 
-        now = time()
-        for room_id, data in r.json().items():
-            self.rooms.setdefault(
-                room_id,
-                SimpleNamespace(room_id=room_id, temp_deviation=None, sync_time=None),
-            )
-            self.rooms[room_id].temp_deviation = data["temp_deviation"]
-            self.rooms[room_id].sync_time = now
+        # Record temperature deviation and time of sync
+        if "temp_set_offset" in data:
+            now = time()
+            for room_id, rdata in r.json().items():
+                self.rooms.setdefault(
+                    room_id,
+                    SimpleNamespace(
+                        room_id=room_id, temp_deviation=None, sync_time=None
+                    ),
+                )
+                self.rooms[room_id].temp_deviation = rdata["temp_deviation"]
+                self.rooms[room_id].sync_time = now
 
-    def controller_sync(self, temp_set_offset, circulator_runs=None):
+    def controller_sync(self, temp_set_offset=None, circulator_runs=None):
         errors = []
-        data = {"temp_set_offset": temp_set_offset}
+        data = {}
+        if temp_set_offset is not None:
+            data["temp_set_offset"] = temp_set_offset
         if circulator_runs is not None:
             data["circulator_runs"] = circulator_runs
 
